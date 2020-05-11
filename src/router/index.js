@@ -1,23 +1,35 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
+import About from "../views/About.vue";
+import Signin from "../views/Signin.vue";
+import store from '../store'
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
-    name: "Home",
+    name: "home",
     component: Home
   },
   {
+    path: "/signin",
+    name: "signin",
+    component: Signin
+  },
+  {
     path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue")
+    name: "about",
+    component: About,
+    beforeEnter: (to, from, next) => {
+      if (! store.getters['auth/authenticated']) {
+        return next({
+          name: 'signin'
+        })
+      }
+      next()
+    }
   }
 ];
 
