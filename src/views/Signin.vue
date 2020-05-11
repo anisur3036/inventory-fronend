@@ -35,10 +35,12 @@
 				signIn: 'auth/signIn'
 			}),
 			signin() {
+    		this.$Progress.start()
     		this.signIn(this.form).then(() =>{
     			this.$router.replace({
     				name: 'about'
     			})
+    			this.$Progress.finish()
     		}).catch(() => {
     			console.log('Failed')
     		})

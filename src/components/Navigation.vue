@@ -29,8 +29,10 @@
 				signOutAction: 'auth/signout'
 			}),
 			signout() {
+				this.$Progress.start()
 				this.signOutAction().then(() => {
 					this.$router.replace({ name: 'home'})
+					this.$Progress.finish()
 				})
 			}
 		}
