@@ -9,27 +9,36 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/",
+    path: "/home",
     name: "home",
-    component: Home
+    component: Home,
+    meta: {
+      secure: true
+    }
   },
   {
-    path: "/signin",
+    path: "/",
     name: "signin",
-    component: Signin
+    component: Signin,
+    meta: {
+      guest: true
+    }
   },
   {
     path: "/about",
     name: "about",
     component: About,
-    beforeEnter: (to, from, next) => {
-      if (! store.getters['auth/authenticated']) {
-        return next({
-          name: 'signin'
-        })
-      }
-      next()
+    meta: {
+      secure: true
     }
+    // beforeEnter: (to, from, next) => {
+    //   if (! store.getters['auth/authenticated']) {
+    //     return next({
+    //       name: 'signin'
+    //     })
+    //   }
+    //   next()
+    // }
   }
 ];
 
@@ -38,5 +47,29 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 });
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.secure)) {
+    if (! store.getters['auth/authenticated']) {
+      console.log("no token");
+      next({
+        name: 'signin'
+      });
+    } else {
+      next();
+    }
+  } else if (to.matched.some(record => record.meta.guest)) {
+    if (! store.getters['auth/authenticated']) {
+      next()
+    } else {
+      console.log("no token");
+      next({
+        name: 'about'
+      })
+    }
+  } else {
+    next();
+  }
+})
 
 export default router;

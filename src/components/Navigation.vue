@@ -1,16 +1,13 @@
 <template>
 	<div>
-		<router-link 
-			:to="{
-			name: 'home'
-		}"
-		>Home</router-link> |
     <template v-if="authenticated">
+			<router-link 
+				:to="{
+				name: 'home'
+			}"
+			>Home</router-link> |
     	<router-link to="/about">About</router-link> |
     	<a href="#" @click.prevent="signout">Signout</a>
-    </template>
-    <template v-else>
-    	<router-link to="/signin">Signin</router-link>
     </template>
 	</div>
 </template>
@@ -31,7 +28,7 @@
 			signout() {
 				this.$Progress.start()
 				this.signOutAction().then(() => {
-					this.$router.replace({ name: 'home'})
+					this.$router.replace({ name: 'signin'})
 					this.$Progress.finish()
 				})
 			}
