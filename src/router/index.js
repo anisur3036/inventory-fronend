@@ -3,10 +3,12 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import About from "../views/About.vue";
 import Signin from "../views/Signin.vue";
+import Invoice from "../views/invoices/Index.vue";
+import Form from "../views/invoices/Form.vue";
+import Show from "../views/invoices/Show.vue";
 import store from '../store'
 
 Vue.use(VueRouter);
-
 const routes = [
   {
     path: "/home",
@@ -14,6 +16,39 @@ const routes = [
     component: Home,
     meta: {
       secure: true
+    }
+  },
+  {
+    path: "/invoices",
+    name: "invoice",
+    component: Invoice,
+    meta: {
+      secure: true
+    }
+  },
+  {
+    path: "/invoices/create",
+    name: "create",
+    component: Form,
+    meta: {
+      secure: true
+    }
+  },
+  {
+    path: "/invoices/:id/edit",
+    name: "edit",
+    component: Form,
+    meta: {
+      secure: true,
+      mode: 'edit'
+    }
+  },
+  {
+    path: "/invoices/:id",
+    name: "show",
+    component: Show,
+    meta: {
+      secure: true,
     }
   },
   {
@@ -31,14 +66,6 @@ const routes = [
     meta: {
       secure: true
     }
-    // beforeEnter: (to, from, next) => {
-    //   if (! store.getters['auth/authenticated']) {
-    //     return next({
-    //       name: 'signin'
-    //     })
-    //   }
-    //   next()
-    // }
   }
 ];
 

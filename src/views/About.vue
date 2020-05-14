@@ -5,9 +5,6 @@
     <template v-if="user">
 			<p>Hi, {{ user.name }}</p>
     </template>
-    <template else>
-    	No user
-    </template>
   </div>
 </template>
 <script>
