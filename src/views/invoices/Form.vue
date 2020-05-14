@@ -1,5 +1,7 @@
 <template>
-    <div class="panel" v-if="show">
+    <div class="nav">
+        <Navigation />
+    <div class="document panel" v-if="show">
         <div class="panel-heading">
             <span class="panel-title">{{title}} Invoice</span>
         </div>
@@ -68,7 +70,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(item, index) in form.items" :key="index">
+                    <tr v-for="(item, index) in form.items" :key="item.id">
                         <td class="w-14">
                             <search :url="productURL" :initialize="item.product"
                                 @input="onProduct(index, $event)" />
@@ -142,20 +144,23 @@
             </div>
         </div>
     </div>
+    </div>
 </template>
 <script type="text/javascript">
     import Vue from 'vue'
     import {get, byMethod } from '../../lib/api'
-    import { Search } from '../../components/search'
+    import { Search } from '../../components/search'    
+    import Navigation from '@/components/Navigation.vue'
+       
     function initialize(to) {
         let urls = {
-            'create': `/invoices/create`,
-            'edit': `/invoices/${to.params.id}/edit`
+            'create': `/api/invoices/create`,
+            'edit': `/api/invoices/${to.params.id}/edit`
         }
         return (urls[to.meta.mode] || urls['create'])
     }
     export default {
-        components: { Search },
+        components: { Search, Navigation},
         data () {
             return {
                 form: {},
@@ -163,11 +168,11 @@
                 isProcessing: false,
                 show: false,
                 resource: '/invoices',
-                store: '/invoices',
+                store: '/api/invoices',
                 method: 'POST',
                 title: 'Create',
-                productURL: '/products',
-                customerURL: '/customers'
+                productURL: '/api/products',
+                customerURL: '/api/customers'
             }
         },
         beforeRouteEnter(to, from, next) {
@@ -198,12 +203,12 @@
             setData(res) {
                 Vue.set(this.$data, 'form', res.data.form)
                 if(this.$route.meta.mode === 'edit') {
-                    this.store = `/invoices/${this.$route.params.id}`
+                    this.store = `/api/invoices/${this.$route.params.id}`
                     this.method = 'PUT'
                     this.title = 'Edit'
                 }
                 this.show = true
-                this.$bar.finish()
+                // this.$bar.finish()
             },
             addNewLine() {
                 this.form.items.push({

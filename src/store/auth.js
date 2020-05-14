@@ -24,7 +24,7 @@ export default {
   },
   actions: {
     async signIn({ dispatch }, credentails) {
-      let response = await axios.post('auth/signin', credentails);
+      let response = await axios.post('api/auth/signin', credentails);
       return dispatch('attempt', response.data.token);
     },
 
@@ -38,7 +38,7 @@ export default {
       }
 
       try {
-        let response = await axios.get('auth/me');
+        let response = await axios.get('api/auth/me');
         commit('SET_USER', response.data);
 
       } catch(e) {
@@ -47,7 +47,7 @@ export default {
       }
     },
     signout({ commit }) {
-      return axios.post('auth/signout').then(() => {
+      return axios.post('api/auth/signout').then(() => {
         commit('SET_TOKEN', null);
         commit('SET_USER', null);
       })

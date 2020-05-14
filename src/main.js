@@ -21,9 +21,14 @@ const options = {
 
 Vue.use(VueProgressBar, options)
 
+// router.beforeEach((to, from, next) => {
+//     // VueProgressBar.start()
+//     next()
+// })
+
 require ('@/store/subscriber');
 
-axios.defaults.baseURL = "http://localhost:8000/api";
+axios.defaults.baseURL = "http://localhost:8000";
 
 Vue.config.productionTip = false;
 

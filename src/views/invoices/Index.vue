@@ -1,5 +1,7 @@
 <template>
-    <div class="panel">
+    <div class="nav">
+        <Navigation />
+    <div class="document panel">
         <div class="panel-heading">
             <span class="panel-title">Invoices</span>
             <div>
@@ -7,7 +9,7 @@
                     New Invoice
                 </router-link>
             </div>
-        </div>.\
+        </div>
         <div class="panel-body">
             <table class="table table-link">
                 <thead>
@@ -46,11 +48,16 @@
             </div>
         </div>
     </div>
+</div>
 </template>
 <script type="text/javascript">
     import Vue from 'vue'
     import { get } from '../../lib/api'
+    import Navigation from '@/components/Navigation.vue'
     export default {
+        components: {
+            Navigation
+        },
         data () {
             return {
                 model: {
@@ -59,13 +66,13 @@
             }
         },
         beforeRouteEnter(to, from, next) {
-            get('/invoices', to.query)
+            get('/api/invoices', to.query)
                 .then((res) => {
                     next(vm => vm.setData(res))
                 })
         },
         beforeRouteUpdate(to, from, next) {
-            get('invoices', to.query)
+            get('/api/invoices', to.query)
                 .then((res) => {
                     this.setData(res)
                     next()
@@ -73,12 +80,12 @@
         },
         methods: {
             detailsPage(item) {
-                this.$router.push(`invoices/${item.id}`)
+                this.$router.push(`/invoices/${item.id}`)
             },
             setData(res) {
                 Vue.set(this.$data, 'model', res.data.results)
                 this.page = this.model.current_page
-                this.$bar.finish()
+                this.$Progress.finish()
             },
             nextPage() {
                 if(this.model.next_page_url) {
