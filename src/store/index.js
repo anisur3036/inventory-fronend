@@ -1,13 +1,13 @@
-import Vue from "vue";
-import Vuex from "vuex";
-import auth from "./auth";
+import Vue from 'vue';
+import Vuex from 'vuex';
+import auth from './auth';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    title: "This is my title",
-    links: ["http://google.com", "http://facebook.com", "http://vuejs.org"]
+    title: 'This is my title',
+    links: ['http://google.com', 'http://facebook.com', 'http://vuejs.org']
   },
   getters: {
     gettitle: state => {
@@ -33,10 +33,10 @@ export default new Vuex.Store({
   },
   actions: {
     removeLinks: ({ commit }, payload) => {
-      commit("REVOME_LINK", payload);
+      commit('REVOME_LINK', payload);
     },
     removeAll: ({ commit }) => {
-      commit("REVOME_ALL");
+      commit('REVOME_ALL');
     }
   },
   modules: {

@@ -8,8 +8,8 @@
   </div>
 </template>
 <script>
-import Navigation from "@/components/Navigation.vue";
-import { mapGetters } from "vuex";
+import { mapGetters } from 'vuex';
+import Navigation from '../components/Navigation.vue';
 
 export default {
   components: {
@@ -17,8 +17,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      auth: "auth/authenticated",
-      user: "auth/user"
+      auth: 'auth/authenticated',
+      user: 'auth/user'
     })
   }
 };

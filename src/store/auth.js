@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 export default {
   namespaced: true,
@@ -24,13 +24,13 @@ export default {
   },
   actions: {
     async signIn({ dispatch }, credentails) {
-      let response = await axios.post("api/auth/signin", credentails);
-      return dispatch("attempt", response.data.token);
+      const response = await axios.post('api/auth/signin', credentails);
+      return dispatch('attempt', response.data.token);
     },
 
     async attempt({ commit, state }, token) {
       if (token) {
-        commit("SET_TOKEN", token);
+        commit('SET_TOKEN', token);
       }
 
       if (!state.token) {
@@ -38,17 +38,17 @@ export default {
       }
 
       try {
-        let response = await axios.get("api/auth/me");
-        commit("SET_USER", response.data);
+        const response = await axios.get('api/auth/me');
+        commit('SET_USER', response.data);
       } catch (e) {
-        commit("SET_TOKEN", null);
-        commit("SET_USER", null);
+        commit('SET_TOKEN', null);
+        commit('SET_USER', null);
       }
     },
     signout({ commit }) {
-      return axios.post("api/auth/signout").then(() => {
-        commit("SET_TOKEN", null);
-        commit("SET_USER", null);
+      return axios.post('api/auth/signout').then(() => {
+        commit('SET_TOKEN', null);
+        commit('SET_USER', null);
       });
     }
   }

@@ -100,9 +100,10 @@
   </div>
 </template>
 <script type="text/javascript">
-import Vue from "vue";
-import Navigation from "@/components/Navigation.vue";
-import { get, byMethod } from "../../lib/api";
+import Vue from 'vue';
+import Navigation from '@/components/Navigation.vue';
+import { get, byMethod } from '../../lib/api';
+
 export default {
   components: {
     Navigation
@@ -130,13 +131,13 @@ export default {
   },
   methods: {
     setData(res) {
-      Vue.set(this.$data, "model", res.data.model);
+      Vue.set(this.$data, 'model', res.data.model);
       this.show = true;
     },
     deleteItem() {
-      byMethod("delete", `/api/invoices/${this.model.id}`).then(res => {
+      byMethod('delete', `/api/invoices/${this.model.id}`).then(res => {
         if (res.data.deleted) {
-          this.$router.push("/invoices");
+          this.$router.push('/invoices');
         }
       });
     }

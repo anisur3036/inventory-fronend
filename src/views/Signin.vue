@@ -26,7 +26,7 @@
             </div>
           </div>
           <div class="text-red-400 pl-3 pb-2" v-if="errors['email']">
-            {{ errors["email"][0] }}
+            {{ errors['email'][0] }}
           </div>
           <div class="relative mb-2">
             <label
@@ -46,7 +46,7 @@
             </div>
           </div>
           <div class="text-red-400 pl-3 pb-2" v-if="errors['password']">
-            {{ errors["password"][0] }}
+            {{ errors['password'][0] }}
           </div>
           <div>
             <button class="w-full bg-white rounded p-2" type="submit">
@@ -63,7 +63,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions } from 'vuex';
 
 export default {
   data() {
@@ -77,14 +77,14 @@ export default {
   },
   methods: {
     ...mapActions({
-      signIn: "auth/signIn"
+      signIn: 'auth/signIn'
     }),
     signin() {
       this.$Progress.start();
       this.signIn(this.form)
         .then(() => {
           this.$router.replace({
-            name: "home"
+            name: 'home'
           });
           this.$Progress.finish();
         })

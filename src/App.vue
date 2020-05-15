@@ -23,7 +23,7 @@ export default {
     this.$router.beforeEach((to, from, next) => {
       //  does the page we want to go to have a meta.progress object
       if (to.meta.progress !== undefined) {
-        let meta = to.meta.progress;
+        const meta = to.meta.progress;
         // parse meta tags
         this.$Progress.parseMeta(meta);
       }

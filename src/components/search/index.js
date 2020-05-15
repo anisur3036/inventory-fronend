@@ -1,5 +1,3 @@
-import Search from './Search.vue'
+import Search from './Search.vue';
 
-export {
-	Search
-}
+export { Search };

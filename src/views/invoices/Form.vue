@@ -190,17 +190,17 @@
   </div>
 </template>
 <script type="text/javascript">
-import Vue from "vue";
-import { get, byMethod } from "../../lib/api";
-import { Search } from "../../components/search";
-import Navigation from "@/components/Navigation.vue";
+import Vue from 'vue';
+import Navigation from '@/components/Navigation.vue';
+import { get, byMethod } from '../../lib/api';
+import { Search } from '../../components/search';
 
 function initialize(to) {
-  let urls = {
+  const urls = {
     create: `/api/invoices/create`,
     edit: `/api/invoices/${to.params.id}/edit`
   };
-  return urls[to.meta.mode] || urls["create"];
+  return urls[to.meta.mode] || urls.create;
 }
 export default {
   components: { Search, Navigation },
@@ -210,12 +210,12 @@ export default {
       errors: {},
       isProcessing: false,
       show: false,
-      resource: "/invoices",
-      store: "/api/invoices",
-      method: "POST",
-      title: "Create",
-      productURL: "/api/products",
-      customerURL: "/api/customers"
+      resource: '/invoices',
+      store: '/api/invoices',
+      method: 'POST',
+      title: 'Create',
+      productURL: '/api/products',
+      customerURL: '/api/customers'
     };
   },
   beforeRouteEnter(to, from, next) {
@@ -242,11 +242,11 @@ export default {
   },
   methods: {
     setData(res) {
-      Vue.set(this.$data, "form", res.data.form);
-      if (this.$route.meta.mode === "edit") {
+      Vue.set(this.$data, 'form', res.data.form);
+      if (this.$route.meta.mode === 'edit') {
         this.store = `/api/invoices/${this.$route.params.id}`;
-        this.method = "PUT";
-        this.title = "Edit";
+        this.method = 'PUT';
+        this.title = 'Edit';
       }
       this.show = true;
       // this.$bar.finish()
@@ -261,20 +261,20 @@ export default {
     },
     onCustomer(e) {
       const customer = e.target.value;
-      Vue.set(this.$data.form, "customer", customer);
-      Vue.set(this.$data.form, "customer_id", customer.id);
+      Vue.set(this.$data.form, 'customer', customer);
+      Vue.set(this.$data.form, 'customer_id', customer.id);
     },
     onProduct(index, e) {
       const product = e.target.value;
-      Vue.set(this.form.items[index], "product", product);
-      Vue.set(this.form.items[index], "product_id", product.id);
-      Vue.set(this.form.items[index], "unit_price", product.unit_price);
+      Vue.set(this.form.items[index], 'product', product);
+      Vue.set(this.form.items[index], 'product_id', product.id);
+      Vue.set(this.form.items[index], 'unit_price', product.unit_price);
     },
     removeItem(index) {
       this.form.items.splice(index, 1);
     },
     onCancel() {
-      if (this.$route.meta.mode === "edit") {
+      if (this.$route.meta.mode === 'edit') {
         this.$router.push(`${this.resource}/${this.form.id}`);
       } else {
         this.$router.push(`${this.resource}`);

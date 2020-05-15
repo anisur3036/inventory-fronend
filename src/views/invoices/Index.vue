@@ -66,9 +66,10 @@
   </div>
 </template>
 <script type="text/javascript">
-import Vue from "vue";
-import { get } from "../../lib/api";
-import Navigation from "@/components/Navigation.vue";
+import Vue from 'vue';
+import Navigation from '@/components/Navigation.vue';
+import { get } from '../../lib/api';
+
 export default {
   components: {
     Navigation
@@ -81,12 +82,12 @@ export default {
     };
   },
   beforeRouteEnter(to, from, next) {
-    get("/api/invoices", to.query).then(res => {
+    get('/api/invoices', to.query).then(res => {
       next(vm => vm.setData(res));
     });
   },
   beforeRouteUpdate(to, from, next) {
-    get("/api/invoices", to.query).then(res => {
+    get('/api/invoices', to.query).then(res => {
       this.setData(res);
       next();
     });
@@ -96,27 +97,27 @@ export default {
       this.$router.push(`/invoices/${item.id}`);
     },
     setData(res) {
-      Vue.set(this.$data, "model", res.data.results);
+      Vue.set(this.$data, 'model', res.data.results);
       this.page = this.model.current_page;
       this.$Progress.finish();
     },
     nextPage() {
       if (this.model.next_page_url) {
-        const query = Object.assign({}, this.$route.query);
+        const query = { ...this.$route.query };
         query.page = query.page ? Number(query.page) + 1 : 2;
         this.$router.push({
-          path: "/invoices",
-          query: query
+          path: '/invoices',
+          query
         });
       }
     },
     prevPage() {
       if (this.model.prev_page_url) {
-        const query = Object.assign({}, this.$route.query);
+        const query = { ...this.$route.query };
         query.page = query.page ? Number(query.page) - 1 : 1;
         this.$router.push({
-          path: "/invoices",
-          query: query
+          path: '/invoices',
+          query
         });
       }
     }
