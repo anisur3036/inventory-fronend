@@ -1,10 +1,10 @@
-import axios from 'axios';
+import axios from "axios";
 
 export default {
   namespaced: true,
   state: {
-    token : null,
-    user : null
+    token: null,
+    user: null
   },
   getters: {
     authenticated(state) {
@@ -24,33 +24,32 @@ export default {
   },
   actions: {
     async signIn({ dispatch }, credentails) {
-      let response = await axios.post('api/auth/signin', credentails);
-      return dispatch('attempt', response.data.token);
+      let response = await axios.post("api/auth/signin", credentails);
+      return dispatch("attempt", response.data.token);
     },
 
     async attempt({ commit, state }, token) {
-      if(token) {
-        commit('SET_TOKEN', token);
+      if (token) {
+        commit("SET_TOKEN", token);
       }
 
       if (!state.token) {
-        return
+        return;
       }
 
       try {
-        let response = await axios.get('api/auth/me');
-        commit('SET_USER', response.data);
-
-      } catch(e) {
-        commit('SET_TOKEN', null);
-        commit('SET_USER', null);
+        let response = await axios.get("api/auth/me");
+        commit("SET_USER", response.data);
+      } catch (e) {
+        commit("SET_TOKEN", null);
+        commit("SET_USER", null);
       }
     },
     signout({ commit }) {
-      return axios.post('api/auth/signout').then(() => {
-        commit('SET_TOKEN', null);
-        commit('SET_USER', null);
-      })
+      return axios.post("api/auth/signout").then(() => {
+        commit("SET_TOKEN", null);
+        commit("SET_USER", null);
+      });
     }
   }
-}
+};

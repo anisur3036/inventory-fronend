@@ -6,7 +6,7 @@ import Signin from "../views/Signin.vue";
 import Invoice from "../views/invoices/Index.vue";
 import Form from "../views/invoices/Form.vue";
 import Show from "../views/invoices/Show.vue";
-import store from '../store'
+import store from "../store";
 
 Vue.use(VueRouter);
 const routes = [
@@ -40,7 +40,7 @@ const routes = [
     component: Form,
     meta: {
       secure: true,
-      mode: 'edit'
+      mode: "edit"
     }
   },
   {
@@ -48,7 +48,7 @@ const routes = [
     name: "show",
     component: Show,
     meta: {
-      secure: true,
+      secure: true
     }
   },
   {
@@ -77,26 +77,26 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.secure)) {
-    if (! store.getters['auth/authenticated']) {
+    if (!store.getters["auth/authenticated"]) {
       console.log("no token");
       next({
-        name: 'signin'
+        name: "signin"
       });
     } else {
       next();
     }
   } else if (to.matched.some(record => record.meta.guest)) {
-    if (! store.getters['auth/authenticated']) {
-      next()
+    if (!store.getters["auth/authenticated"]) {
+      next();
     } else {
       console.log("no token");
       next({
-        name: 'about'
-      })
+        name: "about"
+      });
     }
   } else {
     next();
   }
-})
+});
 
 export default router;
