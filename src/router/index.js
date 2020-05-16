@@ -6,10 +6,19 @@ import Signin from '../views/Signin.vue';
 import Invoice from '../views/invoices/Index.vue';
 import Form from '../views/invoices/Form.vue';
 import Show from '../views/invoices/Show.vue';
+import Dashboard from '../views/Dashboard.vue';
 import store from '../store';
 
 Vue.use(VueRouter);
 const routes = [
+  {
+    path: '/dashboard',
+    name: 'dashboard',
+    component: Dashboard,
+    meta: {
+      guest: true
+    }
+  },
   {
     path: '/home',
     name: 'home',
@@ -91,7 +100,7 @@ router.beforeEach((to, from, next) => {
     } else {
       console.log('no token');
       next({
-        name: 'about'
+        name: 'home'
       });
     }
   } else {

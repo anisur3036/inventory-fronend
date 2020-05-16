@@ -8,7 +8,7 @@ import store from './store';
 const options = {
   color: '#bffaf3',
   failedColor: '#874b4b',
-  thickness: '6px',
+  thickness: '4px',
   transition: {
     speed: '0.2s',
     opacity: '0.6s',

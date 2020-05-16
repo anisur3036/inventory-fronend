@@ -1,7 +1,7 @@
 <template>
   <div class="nav">
     <Navigation />
-    <div class="document panel" v-if="show">
+    <div class="panel" v-if="show">
       <div class="panel-heading">
         <span class="panel-title">{{ model.number }}</span>
         <div>
