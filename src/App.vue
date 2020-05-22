@@ -1,12 +1,9 @@
 <template>
-  <div id="container">
-    <div id="nav"></div>
-    <div class="content">
-      <transition name="fade" mode="out-in">
-        <router-view />
-      </transition>
-      <vue-progress-bar></vue-progress-bar>
-    </div>
+  <div class="content">
+    <transition name="fade" mode="out-in">
+      <router-view />
+    </transition>
+    <vue-progress-bar></vue-progress-bar>
   </div>
 </template>
 

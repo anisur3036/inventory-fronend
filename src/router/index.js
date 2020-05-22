@@ -7,10 +7,28 @@ import Invoice from '../views/invoices/Index.vue';
 import Form from '../views/invoices/Form.vue';
 import Show from '../views/invoices/Show.vue';
 import Dashboard from '../views/Dashboard.vue';
+import Dashboard1 from '../views/dashboard/Dashboard1.vue';
+import Github from '../views/dashboard/Github.vue';
 import store from '../store';
 
 Vue.use(VueRouter);
 const routes = [
+  {
+    path: '/github',
+    name: 'github',
+    component: Github,
+    meta: {
+      guest: true
+    }
+  },
+  {
+    path: '/dashboard1',
+    name: 'dashboard1',
+    component: Dashboard1,
+    meta: {
+      guest: true
+    }
+  },
   {
     path: '/dashboard',
     name: 'dashboard',

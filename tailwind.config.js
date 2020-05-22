@@ -17,6 +17,7 @@ module.exports = {
 
       black: '#000',
       white: '#fff',
+      deepblue: '#008bfa',
 
       gray: {
         100: '#f7fafc',
@@ -651,9 +652,9 @@ module.exports = {
     borderCollapse: ['responsive'],
     borderColor: ['responsive', 'hover', 'focus'],
     borderOpacity: ['responsive', 'hover', 'focus'],
-    borderRadius: ['responsive'],
-    borderStyle: ['responsive'],
-    borderWidth: ['responsive'],
+    borderRadius: ['responsive', 'hover'],
+    borderStyle: ['responsive', 'hover'],
+    borderWidth: ['responsive', 'hover'],
     boxShadow: ['responsive', 'hover', 'focus'],
     boxSizing: ['responsive'],
     cursor: ['responsive'],
