@@ -64,6 +64,7 @@
 
 <script>
 import { mapActions } from 'vuex';
+import Login from '../layouts/Login.vue';
 
 export default {
   data() {
@@ -74,6 +75,9 @@ export default {
       },
       errors: {}
     };
+  },
+  created() {
+    this.$emit(`update:layout`, Login);
   },
   methods: {
     ...mapActions({

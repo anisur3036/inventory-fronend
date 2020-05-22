@@ -1,17 +1,23 @@
 <template>
   <div id="container">
-    <div id="nav"></div>
-    <div class="content">
-      <transition name="fade" mode="out-in">
-        <router-view />
-      </transition>
-      <vue-progress-bar></vue-progress-bar>
-    </div>
+    <component :is="layout">
+      <div class="content">
+        <transition name="fade" mode="out-in">
+          <router-view :layout.sync="layout" />
+        </transition>
+        <vue-progress-bar></vue-progress-bar>
+      </div>
+    </component>
   </div>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      layout: `div`
+    };
+  },
   mounted() {
     //  [App.vue specific] When App.vue is finish loading finish the progress bar
     this.$Progress.finish();

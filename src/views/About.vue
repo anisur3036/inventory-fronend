@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <Navigation />
+    <!-- <Navigation /> -->
     <h1>About</h1>
     <template v-if="user">
       <p>Hi, {{ user.name }}</p>
@@ -9,11 +9,14 @@
 </template>
 <script>
 import { mapGetters } from 'vuex';
-import Navigation from '../components/Navigation.vue';
+import Layout from '@/layouts/Default.vue';
 
 export default {
   components: {
-    Navigation
+    //
+  },
+  created() {
+    this.$emit(`update:layout`, Layout);
   },
   computed: {
     ...mapGetters({

@@ -1,6 +1,5 @@
 <template>
   <div class="nav">
-    <Navigation />
     <div class="panel" v-if="show">
       <div class="panel-heading">
         <span class="panel-title">{{ model.number }}</span>
@@ -101,13 +100,10 @@
 </template>
 <script type="text/javascript">
 import Vue from 'vue';
-import Navigation from '@/components/Navigation.vue';
+import Layout from '@/layouts/Default.vue';
 import { get, byMethod } from '../../lib/api';
 
 export default {
-  components: {
-    Navigation
-  },
   data() {
     return {
       show: false,
@@ -116,6 +112,9 @@ export default {
         customer: {}
       }
     };
+  },
+  created() {
+    this.$emit(`update:layout`, Layout);
   },
   beforeRouteEnter(to, from, next) {
     get(`/api/invoices/${to.params.id}`).then(res => {

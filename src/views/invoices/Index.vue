@@ -1,6 +1,5 @@
 <template>
   <div class="nav">
-    <Navigation />
     <div class="document panel">
       <div class="panel-heading">
         <span class="panel-title">Invoices</span>
@@ -67,19 +66,19 @@
 </template>
 <script type="text/javascript">
 import Vue from 'vue';
-import Navigation from '@/components/Navigation.vue';
+import Layout from '@/layouts/Default.vue';
 import { get } from '../../lib/api';
 
 export default {
-  components: {
-    Navigation
-  },
   data() {
     return {
       model: {
         data: []
       }
     };
+  },
+  created() {
+    this.$emit(`update:layout`, Layout);
   },
   beforeRouteEnter(to, from, next) {
     get('/api/invoices', to.query).then(res => {

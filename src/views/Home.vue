@@ -1,16 +1,18 @@
 <template>
   <div class="home">
-    <Navigation />
     <h1>Home</h1>
   </div>
 </template>
 
 <script>
-import Navigation from '@/components/Navigation.vue';
+import Layout from '@/layouts/Default.vue';
 
 export default {
-  components: {
-    Navigation
+  // components: {
+  //   Navigation
+  // },
+  created() {
+    this.$emit(`update:layout`, Layout);
   }
 };
 </script>

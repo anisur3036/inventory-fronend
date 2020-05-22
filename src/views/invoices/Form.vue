@@ -1,6 +1,5 @@
 <template>
   <div class="nav">
-    <Navigation />
     <div class="document panel" v-if="show">
       <div class="panel-heading">
         <span class="panel-title">{{ title }} Invoice</span>
@@ -191,7 +190,7 @@
 </template>
 <script type="text/javascript">
 import Vue from 'vue';
-import Navigation from '@/components/Navigation.vue';
+import Layout from '@/layouts/Default.vue';
 import { get, byMethod } from '../../lib/api';
 import { Search } from '../../components/search';
 
@@ -203,7 +202,10 @@ function initialize(to) {
   return urls[to.meta.mode] || urls.create;
 }
 export default {
-  components: { Search, Navigation },
+  components: { Search },
+  created() {
+    this.$emit(`update:layout`, Layout);
+  },
   data() {
     return {
       form: {},
