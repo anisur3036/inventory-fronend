@@ -7,10 +7,28 @@ import Invoice from '../views/invoices/Index.vue';
 import Form from '../views/invoices/Form.vue';
 import Show from '../views/invoices/Show.vue';
 import Dashboard from '../views/Dashboard.vue';
+import Carbon from '../views/Carbon.vue';
+import Bdtask from '../views/Bdtask.vue';
 import store from '../store';
 
 Vue.use(VueRouter);
 const routes = [
+  {
+    path: '/bdtask',
+    name: 'bdtask',
+    component: Bdtask,
+    meta: {
+      guest: true
+    }
+  },
+  {
+    path: '/carbon',
+    name: 'carbon',
+    component: Carbon,
+    meta: {
+      guest: true
+    }
+  },
   {
     path: '/dashboard',
     name: 'dashboard',
